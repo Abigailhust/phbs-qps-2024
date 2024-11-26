@@ -36,3 +36,4 @@ last_four_quarters = quarterly_df.tail(4)
 last_four_quarters.to_csv(f"{output_dir}/Inflation_last_four_quarters.csv")
 
 print("CPI data and inflation rates have been saved in /data.")
+print(last_four_quarters)
