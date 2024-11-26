@@ -3,6 +3,8 @@ print(f"Current Python executable: {sys.executable}")
 import pandas as pd
 import requests
 import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
+from fetch import fetch_data
 
 # API configuration
 API_KEY = "9a821ee9ee2f578569ab5788b184bd41"
@@ -10,16 +12,7 @@ SERIES_ID = 'CPILFESL'
 FRED_API_URL = f'https://api.stlouisfed.org/fred/series/observations?series_id={SERIES_ID}&api_key={API_KEY}&file_type=json'
 
 # Fetch data from API
-response = requests.get(FRED_API_URL)
-if response.status_code != 200:
-    raise ValueError(f"Failed to fetch data from FRED API. HTTP Status: {response.status_code}")
-
-observations = response.json().get('observations', [])
-if not observations:
-    raise ValueError("No observations found in the API response.")
-
-# Create a DataFrame
-df = pd.DataFrame(observations)
+df = fetch_data(FRED_API_URL)
 df['date'] = pd.to_datetime(df['date'])
 df['value'] = pd.to_numeric(df['value'], errors='coerce')
 df = df.dropna()  # Drop rows with NaN values
