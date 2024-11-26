@@ -1,4 +1,8 @@
-# phbs-qps-2024
+# phbs-qps-2024  
+
+studentID: 2401212443 name: Abigail Tao
+
+
 
 URL: https://github.com/Abigailhust/phbs-qps-2024
 
@@ -25,3 +29,4 @@ URL: https://github.com/Abigailhust/phbs-qps-2024
 7. run the code and output is in data directory
 
    `python scripts/HW1.py`
+
