@@ -1,7 +1,6 @@
 import sys
 print(f"Current Python executable: {sys.executable}")
 import pandas as pd
-import requests
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from fetch import fetch_data
@@ -28,7 +27,7 @@ if not os.path.exists(output_dir):
 df.to_csv(f"{output_dir}/CPI.csv")
 
 # Resample to quarterly and calculate inflation rate
-quarterly_df = df.resample('Q').mean()
+quarterly_df = df.resample('QE').mean()
 quarterly_df = pd.DataFrame(quarterly_df)
 quarterly_df['inflation_rate'] = quarterly_df['value'].pct_change()
 
@@ -36,4 +35,4 @@ quarterly_df['inflation_rate'] = quarterly_df['value'].pct_change()
 last_four_quarters = quarterly_df.tail(4)
 last_four_quarters.to_csv(f"{output_dir}/Inflation_last_four_quarters.csv")
 
-print("CPI data and inflation rates have been saved.")
+print("CPI data and inflation rates have been saved in /data.")
